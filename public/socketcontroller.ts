@@ -38,6 +38,9 @@ socket.on('loginfo',(data) => {
 });
 socket.on('erroraccount',(data)=> {
   Materialize.toast('Sai thông tin đăng nhập', 4000);
+  $('button').text('Bắt Đầu BOT');
+  $('button').removeClass('preloader-wrapper');
+   $('button').attr('disabled',false);
   console.log(data);
 });
 if(!socket) {
@@ -46,8 +49,19 @@ if(!socket) {
 function botstart(form)  {
  let userdata  =$(form).serializeObject();
  $('button').attr('disabled',true);
- $('button').addClass('preloader-wrapper');
+ $('button').text('Đang load.Ahihi')
+ if(!userdata.accounttype) {
+   userdata.accounttype='ptc';
+ }
+ if(!userdata.username || !userdata.password ) {
+   alert('Điền username và password')
+    $('button').removeClass('preloader-wrapper');
+     $('button').attr('disabled',false);
+     $('button').text('Bắt Đầu BOT');
+ } else {
  console.log(userdata);
  socket.emit('botstart',{info : userdata });
+
+ }
   return false;
 }

@@ -10,7 +10,8 @@ app.use("/public", express.static(__dirname + "/public"));
 app.get('/', function (req, res) {
     res.render('index.ejs');
 });
-app.listen(80, function () {
+var host ='103.237.147.143';
+app.listen(80, host,function () {
     console.log("Server Start On Port 3000");
 });
 var user = 0;
@@ -25,7 +26,7 @@ io.on('connection', function (socket) {
         var error = false;
         var loginsuccess = false;
         var useraccount = data.info;
-        var execstring = "cd ../PokemonGo-Bot; python ./pokecli.py -u " + useraccount.username + " -p " + useraccount.password;
+        var execstring = "cd ../PokemonGo-Bot; python ./pokecli.py -a " + useraccount.accounttype + " -u " + useraccount.username + " -p " + useraccount.password + " -l " + useraccount.location;
         ls = spawn(execstring);
         ls.stderr.on('data', function (data) {
             var check = data.search('NotLoggedInException');

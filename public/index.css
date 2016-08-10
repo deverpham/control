@@ -1,7 +1,11 @@
 body {
-  background: #2C3E50 !important;
+  background: #002F2F !important;
   position: relative;
 }
+input {
+  color:white !important;
+}
+
 .ahihi {
   position: relative !important;
   height: 50vh;

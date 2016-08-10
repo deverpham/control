@@ -4,7 +4,7 @@ var serverinfo = (function () {
     return serverinfo;
 }());
 var server = {
-    host: 'localhost',
+    host: '103.237.147.143',
     port: 3000
 };
 var socket = io.connect(server.host + ":" + server.port);
@@ -35,6 +35,9 @@ socket.on('loginfo', function (data) {
 });
 socket.on('erroraccount', function (data) {
     Materialize.toast('Sai thông tin đăng nhập', 4000);
+    $('button').text('Bắt Đầu BOT');
+    $('button').removeClass('preloader-wrapper');
+    $('button').attr('disabled', false);
     console.log(data);
 });
 if (!socket) {
@@ -43,8 +46,19 @@ if (!socket) {
 function botstart(form) {
     var userdata = $(form).serializeObject();
     $('button').attr('disabled', true);
-    $('button').addClass('preloader-wrapper');
-    console.log(userdata);
-    socket.emit('botstart', { info: userdata });
+    $('button').text('Đang load.Ahihi');
+    if (!userdata.accounttype) {
+        userdata.accounttype = 'ptc';
+    }
+    if (!userdata.username || !userdata.password) {
+        alert('Điền username và password');
+        $('button').removeClass('preloader-wrapper');
+        $('button').attr('disabled', false);
+        $('button').text('Bắt Đầu BOT');
+    }
+    else {
+        console.log(userdata);
+        socket.emit('botstart', { info: userdata });
+    }
     return false;
 }
