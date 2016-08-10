@@ -4,7 +4,7 @@ var serverinfo = (function () {
     return serverinfo;
 }());
 var server = {
-    host: 'localhost',
+    host: '103.237.147.143',
     port: 3000
 };
 var socket = io.connect(server.host + ":" + server.port);
@@ -37,6 +37,9 @@ socket.on('loginfo', function (data) {
     data.info = data.info.replace("[HandleSoftBan]", '');
     data.info = data.info.replace("[pokemon_appeared]", '');
     data.info = data.info.replace("[gained_candy]", '');
+    data.info = data.info.replace("[FollowSpiral]", '');
+    data.info = data.info.replace("[position_update]", '');
+    data.info = data.info.replace("Walking from", 'Di Chuyển');
     $('#loginfo').append(data.info);
     var textarea = document.getElementById('loginfo');
     textarea.scrollTop = textarea.scrollHeight;
