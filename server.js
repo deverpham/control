@@ -27,10 +27,10 @@ io.on('connection', function (socket) {
         var useraccount = data.info;
         var execstring;
         if (useraccount.location == '') {
-            execstring = "cd ../PokemonGo-Bot; python ./pokecli.py -a " + useraccount.accounttype + " -u " + useraccount.username + " -p " + useraccount.password + " ";
+            execstring = "cd ../PokemonGo-Bot; python ./pokecli.py -a " + useraccount.accounttype + " -u '" + useraccount.username + "' -p '" + useraccount.password + "' ";
         }
         else {
-            execstring = "cd ../PokemonGo-Bot; python ./pokecli.py -a " + useraccount.accounttype + " -u " + useraccount.username + " -p " + useraccount.password + " -l \"" + useraccount.location + "\"";
+            execstring = "cd ../PokemonGo-Bot; python ./pokecli.py -a " + useraccount.accounttype + " -u '" + useraccount.username + "' -p '" + useraccount.password + "' -l \"" + useraccount.location + "\"";
         }
         ls = spawn(execstring);
         ls.stderr.on('data', function (data) {
