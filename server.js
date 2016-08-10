@@ -35,6 +35,9 @@ io.on('connection', function (socket) {
         ls = spawn(execstring);
         ls.stderr.on('data', function (data) {
             var check = data.search('NotLoggedInException');
+            if (check == -1) {
+                check = data.search('api_error');
+            }
             if (!error) {
                 console.log(data);
                 if (check != -1) {
