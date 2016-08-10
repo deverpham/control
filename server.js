@@ -55,7 +55,9 @@ io.on('connection', function (socket) {
                         socket.on('disconnect', function () {
                             process.kill(ls.pid + 1);
                         });
-                        socket.emit('loginfo', { info: data });
+                        if (data.search('item_discard_skipped') == -1) {
+                            socket.emit('loginfo', { info: data });
+                        }
                     }
                 }
             }

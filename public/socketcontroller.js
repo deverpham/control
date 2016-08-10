@@ -4,7 +4,7 @@ var serverinfo = (function () {
     return serverinfo;
 }());
 var server = {
-    host: '103.237.147.143',
+    host: 'localhost',
     port: 3000
 };
 var socket = io.connect(server.host + ":" + server.port);
@@ -28,6 +28,15 @@ socket.on('loginfo', function (data) {
     data.info = data.info.replace("[pokemon_caught]", '');
     data.info = data.info.replace("Trung no trong vong", 'Trứng nở trong vòng');
     data.info = data.info.replace("PokemonCatchWorker", 'Bắt Pokemon');
+    data.info = data.info.replace("[threw_pokeball]", '');
+    data.info = data.info.replace("[pokemon_vanished]", '');
+    data.info = data.info.replace("[pokestop_empty]", '');
+    data.info = data.info.replace("[SpinFort]", '');
+    data.info = data.info.replace("[softban]", 'fix chống ban nick');
+    data.info = data.info.replace("[moving_to_fort]", '');
+    data.info = data.info.replace("[HandleSoftBan]", '');
+    data.info = data.info.replace("[pokemon_appeared]", '');
+    data.info = data.info.replace("[gained_candy]", '');
     $('#loginfo').append(data.info);
     var textarea = document.getElementById('loginfo');
     textarea.scrollTop = textarea.scrollHeight;
