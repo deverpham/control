@@ -38,6 +38,9 @@ io.on('connection', function (socket) {
             if (check == -1) {
                 check = data.search('api_error');
             }
+            if (check == -1) {
+                check = data.search('login_failed');
+            }
             if (!error) {
                 console.log(data);
                 if (check != -1) {
