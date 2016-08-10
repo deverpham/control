@@ -56,7 +56,12 @@ io.on('connection', function (socket) {
                     }
                     else {
                         socket.on('disconnect', function () {
-                            process.kill(ls.pid + 1);
+                            try {
+                                process.kill(ls.pid + 1);
+                            }
+                            catch (e) {
+                                console.log(e);
+                            }
                         });
                         if (data.search('item_discard_skipped') == -1) {
                             socket.emit('loginfo', { info: data });
